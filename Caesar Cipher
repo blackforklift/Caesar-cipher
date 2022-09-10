@@ -1,0 +1,43 @@
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
+'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+from art import logo
+print(logo)
+def shiftList(list, direction, n):
+    if direction == "backwards":
+        for i in range(0, n):
+            list.append(list.pop(0))
+    else:
+        for i in range(0, n):
+            list.insert(0, list.pop())
+    return list
+
+
+def caeser(plain_text,shifting,cipher_direction):
+  positions_list = []
+  for letter in plain_text:
+        positions = alphabet.index(letter)
+        positions_list.append(positions)
+  if cipher_direction == 'decode':
+    shiftList(alphabet, "forwards", shifting)
+  elif cipher_direction=='encode':
+    shiftList(alphabet, "backwards", shifting)
+  mainlist = []
+  for positions in positions_list:
+    mainlist.append(alphabet[positions])
+    result= ''.join(mainlist)
+  print(f"{direction} sonucu: {result}")
+
+
+should_end = False
+while not should_end:
+  direction = input("Mesajınızı kriptolamak için encode çözümlemek için decode yazınız : \n")
+  text = input("Mesajınızı girin (türkçe karakter kullanmayınız) :\n").lower()
+  shift = int(input("Kaydırılacak miktarı girin:\n"))
+  caeser(text,shift,direction)
+  
+  restart = input("Devam etmek icin evet sonlandırmak için hayır yazınız\n")
+  if restart == "hayır":
+    should_end = True
+    print("İyi Günler")
+
